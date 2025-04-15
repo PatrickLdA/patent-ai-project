@@ -1,0 +1,106 @@
+# =============================================
+# GITIGNORE PARA PROJETO DE IA EM PATENTES
+# =============================================
+
+### Diretórios específicos do projeto ###
+/data/processed/temp/
+/models/experimental/
+/reports/figures/drafts/
+
+### Python ###
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+.env/
+.venv/
+env/
+ENV/
+
+# Pip/Sconda environment files
+*.env
+*.lock
+requirements*.txt
+environment.yml
+conda-env.yml
+pip-selfcheck.json
+Poetry.lock
+Pipfile*
+
+# IDE/Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*.sublime-*
+*.code-workspace
+
+# Jupyter Notebook
+.ipynb_checkpoints
+*.ipynb.metadata
+
+### Dados ###
+# Arquivos grandes/privados
+*.csv
+*.json
+*.pkl
+*.pickle
+*.h5
+*.hdf5
+*.feather
+*.parquet
+/data/raw/**/*  # Exceto README.md
+!/data/raw/README.md
+
+# Modelos treinados
+*.joblib
+*.pth
+*.pt
+*.model
+*.onnx
+
+### Logs e Sistemas ###
+*.log
+logs/
+mlruns/
+wandb/
+tensorboard/
+
+### Documentação ###
+/docs/_build/
+/docs/_static/
+*.aux
+*.toc
+*.out
+*.bbl
+*.blg
+*.synctex.gz
+
+### Configurações Locais ###
+config_local.py
+secrets.ini
+*.key
+*.pem
+*.cert
+credentials.json
+
+### Exceções Controladas ###
+# Manter arquivos vazios de placeholder
+!*/placeholder.md
+!.gitkeep
+
+### Sistemas Operacionais ###
+# macOS
+.DS_Store
+._*
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Linux
+*~
