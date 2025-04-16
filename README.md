@@ -43,6 +43,16 @@ requirements.txt # Dependências Python
 setup.py # Script de instalação (se aplicável)
 ```
 
+## Como iniciar a implementação
+Criar um ambiente virtual usando o arquivo `requirements.txt` com o comando: `python3 -m venv venv`; Ativar o mesmo com o comando `source venv/bin/activate`
+
+1. Crie um ambiente virtual usando o comando: `python3 -m venv venv`.
+2. Ative o ambiente virtual usando o comando: source `venv/bin/activate` (Linux/Mac) ou `venv\Scripts\activate` (Windows).
+3. Instale as dependências listadas no arquivo requirements.txt usando o comando: `pip install -r requirements.txt`.
+4. Criar Novo Terminal para abrir um terminal e executar esses comandos.
+
+Ao instalar uma biblioteca nova, exportar o seu ambiente com o comando `pip freeze > requirements.txt`.
+
 
 ## Contatos
 
