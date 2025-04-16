@@ -23,7 +23,6 @@ ENV/
 # Pip/Sconda environment files
 *.env
 *.lock
-requirements*.txt
 environment.yml
 conda-env.yml
 pip-selfcheck.json
