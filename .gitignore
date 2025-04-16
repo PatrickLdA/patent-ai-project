@@ -43,7 +43,6 @@ Pipfile*
 
 ### Dados ###
 # Arquivos grandes/privados
-*.csv
 *.json
 *.pkl
 *.pickle
