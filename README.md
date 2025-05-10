@@ -1,60 +1,59 @@
 [![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-# Projeto de Pesquisa em IA de Patentes
+# Patent AI Research Project
 
-Este repositório contém o desenvolvimento de um projeto de pesquisa em Inteligência Artificial com foco em análise e modelagem de dados relacionados a patentes. O objetivo é criar ferramentas, métodos e modelos que apoiem a extração, classificação e interpretação de informações tecnológicas de bases de patentes.
+This repository contains the development of a research project in Artificial Intelligence focused on analyzing and modeling data related to patents. The goal is to create tools, methods, and models that support the extraction, classification, and interpretation of technological information from patent databases.
 
-## Estrutura do Projeto
+## Project Structure
 
-Abaixo está a estrutura de diretórios proposta para organizar de forma clara e produtiva os artefatos da pesquisa:
+Below is the proposed directory structure to organize the research artifacts clearly and productively:
 
 ``` 
 data/
-├── raw/ # Dados brutos (não processados)
-├── processed/ # Dados limpos e processados
-└── README.md # Descrição dos conjuntos de dados
+├── raw/ # Raw (unprocessed) data
+├── processed/ # Cleaned and processed data
+└── README.md # Description of the datasets
 
-docs/ # Documentação do projeto
-├── README.md # Recomendações de leitura, esboços e afins
-├── meeting-notes/ # Atas de reuniões
+docs/ # Project documentation
+├── README.md # Reading recommendations, drafts, etc.
+├── meeting-notes/ # Meeting minutes
 
-notebooks/ # Jupyter notebooks de análise/experimentos
-├── exploratory/ # Análises exploratórias
-├── experiments/ # Experimentos formais
-└── sandbox/ # Rascunhos e testes
+notebooks/ # Jupyter notebooks for analysis/experiments
+├── exploratory/ # Exploratory analyses
+├── experiments/ # Formal experiments
+└── sandbox/ # Drafts and tests
 
-src/ # Código fonte do projeto
-├── data/ # Scripts para processamento de dados
-├── features/ # Engenharia de features
-├── models/ # Desenvolvimento de modelos
-└── utils/ # Utilitários comuns
+src/ # Project source code
+├── data/ # Data processing scripts
+├── features/ # Feature engineering
+├── models/ # Model development
+└── utils/ # Common utilities
 
-models/ # Modelos treinados e serializados
-└── README.md # Descrição dos modelos
+models/ # Trained and serialized models
+└── README.md # Model descriptions
 
-.gitignore # Arquivos a serem ignorados pelo Git
+.gitignore # Files to be ignored by Git
 
-LICENSE # Licença do projeto
+LICENSE # Project license
 
-README.md # Visão geral do projeto (este arquivo)
+README.md # Project overview (this file)
 
-requirements.txt # Dependências Python
+requirements.txt # Python dependencies
 
-setup.py # Script de instalação (se aplicável)
+setup.py # Installation script (if applicable)
 ```
 
-## Como iniciar a implementação
-Criar um ambiente virtual usando o arquivo `requirements.txt` com o comando: `python3 -m venv venv`; Ativar o mesmo com o comando `source venv/bin/activate`
+## How to Start Implementation
+Create a virtual environment using the `requirements.txt` file with the command: `python3 -m venv venv`; Activate it with the command `source venv/bin/activate`.
 
-1. Crie um ambiente virtual usando o comando: `python3 -m venv venv`.
-2. Ative o ambiente virtual usando o comando: source `venv/bin/activate` (Linux/Mac) ou `venv\Scripts\activate` (Windows).
-3. Instale as dependências listadas no arquivo requirements.txt usando o comando: `pip install -r requirements.txt`.
-4. Criar Novo Terminal para abrir um terminal e executar esses comandos.
+1. Create a virtual environment using the command: `python3 -m venv venv`.
+2. Activate the virtual environment using the command: `source venv/bin/activate` (Linux/Mac) or `venv\Scripts\activate` (Windows).
+3. Install the dependencies listed in the `requirements.txt` file using the command: `pip install -r requirements.txt`.
+4. Open a new terminal to execute these commands.
 
-Ao instalar uma biblioteca nova, exportar o seu ambiente com o comando `pip freeze > requirements.txt`.
+When installing a new library, export your environment with the command `pip freeze > requirements.txt`.
 
-
-## Contatos
+## Contacts
 
 [Carla Bonato Marcolin](http://lattes.cnpq.br/3648130183559806)  
   Email: carla@ufu.br
