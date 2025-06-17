@@ -39,8 +39,6 @@ LICENSE # Project license
 README.md # Project overview (this file)
 
 requirements.txt # Python dependencies
-
-setup.py # Installation script (if applicable)
 ```
 
 ## How to Start Implementation
@@ -52,6 +50,16 @@ Create a virtual environment using the `requirements.txt` file with the command:
 4. Open a new terminal to execute these commands.
 
 When installing a new library, export your environment with the command `pip freeze > requirements.txt`.
+
+## Project Map
+[stemming.ipynb](notebooks/experiments/stemming.ipynb): This notebook process the TRIZ and patent bases of text normalization and linguistic preprocessing for patent data using Natural Language Processing (NLP) techniques, generating a standard lemmatized data.
+
+[to_finder.ipynb](notebooks/experiments/to_finder.ipynb): This notebook presents a workflow for extracting and matching "Task" and "Object" elements from patent documents using Natural Language Processing (NLP) techniques.
+
+[translation_patents_inpi_dataset.ipynb](notebooks/experiments/translation_patents_inpi_dataset.ipynb)
+
+
+[exploring_triz_multilingual.ipynb](notebooks/exploratory/exploring_triz_multilingual.ipynb)
 
 ## Contacts
 
