@@ -52,6 +52,7 @@ Pipfile*
 *.parquet
 /data/raw/**/*  # Exceto README.md
 !/data/raw/README.md
+/notebooks/experiments/chroma_rag_tabular/*
 
 # Modelos treinados
 *.joblib
