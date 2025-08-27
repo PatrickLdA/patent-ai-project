@@ -1,0 +1,428 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "https://marketplace.visualstudio.com/items?itemName=pomdtr.excalidraw-editor",
+  "elements": [
+    {
+      "id": "aOwma1hwWoPa0gkTVZcWi",
+      "type": "text",
+      "x": 258.88671875,
+      "y": 148.5,
+      "width": 397.2265625,
+      "height": 50,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "index": "a0",
+      "roundness": null,
+      "seed": 152604014,
+      "version": 114,
+      "versionNonce": 1253566254,
+      "isDeleted": false,
+      "boundElements": [
+        {
+          "id": "hXu9vGDo3gOQpqBretc84",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1755133397920,
+      "link": null,
+      "locked": false,
+      "text": "TRATAMENTO DE COLISÕES EM\nUPLINK",
+      "fontSize": 20,
+      "fontFamily": 5,
+      "textAlign": "left",
+      "verticalAlign": "top",
+      "containerId": null,
+      "originalText": "TRATAMENTO DE COLISÕES EM UPLINK",
+      "autoResize": false,
+      "lineHeight": 1.25
+    },
+    {
+      "id": "TM63SdLGFPM7xuZmBtZNj",
+      "type": "text",
+      "x": 775.8600845336914,
+      "y": 158.5,
+      "width": 244.2798309326172,
+      "height": 25,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "index": "a1",
+      "roundness": null,
+      "seed": 1757127794,
+      "version": 89,
+      "versionNonce": 1271384814,
+      "isDeleted": false,
+      "boundElements": [
+        {
+          "id": "hXu9vGDo3gOQpqBretc84",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1755133402600,
+      "link": null,
+      "locked": false,
+      "text": "tratamento colisao uplink",
+      "fontSize": 20,
+      "fontFamily": 5,
+      "textAlign": "left",
+      "verticalAlign": "top",
+      "containerId": null,
+      "originalText": "tratamento colisao uplink",
+      "autoResize": true,
+      "lineHeight": 1.25
+    },
+    {
+      "id": "eJry1Wqer-y2io0x3MXgb",
+      "type": "text",
+      "x": 254.10015869140625,
+      "y": 249.5,
+      "width": 413.7996826171875,
+      "height": 100,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "index": "a2",
+      "roundness": null,
+      "seed": 1312418542,
+      "version": 106,
+      "versionNonce": 481727982,
+      "isDeleted": false,
+      "boundElements": [
+        {
+          "id": "QQ_frxTEp0eiuZeWDopq_",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1755133460783,
+      "link": null,
+      "locked": false,
+      "text": "ALOJAMENTO DE VELA DE IGNIÇÃO\nCOM PROTEÇÃO ANTICORROSIVA NO\nLADO INTERNO, BEM COMO VELA DE\nIGNIÇÃO E PROCESSO DE PRODUÇÃO",
+      "fontSize": 20,
+      "fontFamily": 5,
+      "textAlign": "left",
+      "verticalAlign": "top",
+      "containerId": null,
+      "originalText": "ALOJAMENTO DE VELA DE IGNIÇÃO COM PROTEÇÃO ANTICORROSIVA NO LADO INTERNO, BEM COMO VELA DE IGNIÇÃO E PROCESSO DE PRODUÇÃO",
+      "autoResize": false,
+      "lineHeight": 1.25
+    },
+    {
+      "id": "uz_uOYtSKgh0YwLKplO0n",
+      "type": "text",
+      "x": 777.7602233886719,
+      "y": 265,
+      "width": 329.47955322265625,
+      "height": 75,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "index": "a3",
+      "roundness": null,
+      "seed": 936238706,
+      "version": 168,
+      "versionNonce": 737932786,
+      "isDeleted": false,
+      "boundElements": [
+        {
+          "id": "QQ_frxTEp0eiuZeWDopq_",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1755133463184,
+      "link": null,
+      "locked": false,
+      "text": "alojamento vela ignicao protecao\nanticorrosivo interno vela ignicao\nprocesso producao",
+      "fontSize": 20,
+      "fontFamily": 5,
+      "textAlign": "left",
+      "verticalAlign": "top",
+      "containerId": null,
+      "originalText": "alojamento vela ignicao protecao anticorrosivo interno vela ignicao processo producao",
+      "autoResize": false,
+      "lineHeight": 1.25
+    },
+    {
+      "id": "UAVyGpT7cjQgy00YAVE4D",
+      "type": "text",
+      "x": 252.940185546875,
+      "y": 399,
+      "width": 390.11962890625,
+      "height": 100,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "index": "a4",
+      "roundness": null,
+      "seed": 2043685614,
+      "version": 64,
+      "versionNonce": 693358766,
+      "isDeleted": false,
+      "boundElements": [
+        {
+          "id": "68LxNT15bijFST5Z1H-uP",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1755133368614,
+      "link": null,
+      "locked": false,
+      "text": "BIBLIOTECAS DE CÉLULAS ÚNICAS E\nNÚCLEOS ÚNICOS DE ALTO\nRENDIMENTO E MÉTODOS DE\nPREPARO E USO",
+      "fontSize": 20,
+      "fontFamily": 5,
+      "textAlign": "left",
+      "verticalAlign": "top",
+      "containerId": null,
+      "originalText": "BIBLIOTECAS DE CÉLULAS ÚNICAS E NÚCLEOS ÚNICOS DE ALTO RENDIMENTO E MÉTODOS DE PREPARO E USO",
+      "autoResize": false,
+      "lineHeight": 1.25
+    },
+    {
+      "id": "4Qv6myMMN3VVTNU3W14--",
+      "type": "text",
+      "x": 776.3102416992188,
+      "y": 405.5,
+      "width": 371.3795166015625,
+      "height": 50,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "index": "a5",
+      "roundness": null,
+      "seed": 1169992626,
+      "version": 111,
+      "versionNonce": 1205730606,
+      "isDeleted": false,
+      "boundElements": [
+        {
+          "id": "68LxNT15bijFST5Z1H-uP",
+          "type": "arrow"
+        }
+      ],
+      "updated": 1755133368614,
+      "link": null,
+      "locked": false,
+      "text": "biblioteca celula unico nucleo unico\nalto rendimento metodo preparo uso",
+      "fontSize": 20,
+      "fontFamily": 5,
+      "textAlign": "left",
+      "verticalAlign": "top",
+      "containerId": null,
+      "originalText": "biblioteca celula unico nucleo unico alto rendimento metodo preparo uso",
+      "autoResize": false,
+      "lineHeight": 1.25
+    },
+    {
+      "id": "hXu9vGDo3gOQpqBretc84",
+      "type": "arrow",
+      "x": 658,
+      "y": 172.90967855490302,
+      "width": 114.00000000000011,
+      "height": 0.4041472794183676,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "index": "a6",
+      "roundness": {
+        "type": 2
+      },
+      "seed": 1583504558,
+      "version": 83,
+      "versionNonce": 1923890478,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1755133402601,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          114.00000000000011,
+          0.4041472794183676
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "aOwma1hwWoPa0gkTVZcWi",
+        "focus": 0,
+        "gap": 1.88671875
+      },
+      "endBinding": {
+        "elementId": "TM63SdLGFPM7xuZmBtZNj",
+        "focus": -0.23999999999999977,
+        "gap": 3.8600845336914062
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "elbowed": false
+    },
+    {
+      "id": "QQ_frxTEp0eiuZeWDopq_",
+      "type": "arrow",
+      "x": 681,
+      "y": 293.9102010591829,
+      "width": 89.99999999999989,
+      "height": 0.7850099209116479,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "index": "a7",
+      "roundness": {
+        "type": 2
+      },
+      "seed": 1833000686,
+      "version": 112,
+      "versionNonce": 1554802610,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1755133463185,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          89.99999999999989,
+          -0.7850099209116479
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "eJry1Wqer-y2io0x3MXgb",
+        "focus": -0.09252588418361013,
+        "gap": 13.10015869140625
+      },
+      "endBinding": {
+        "elementId": "uz_uOYtSKgh0YwLKplO0n",
+        "focus": 0.2939951093861064,
+        "gap": 6.760223388671989
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "elbowed": false
+    },
+    {
+      "id": "68LxNT15bijFST5Z1H-uP",
+      "type": "arrow",
+      "x": 658,
+      "y": 427,
+      "width": 114,
+      "height": 0,
+      "angle": 0,
+      "strokeColor": "#1e1e1e",
+      "backgroundColor": "transparent",
+      "fillStyle": "solid",
+      "strokeWidth": 2,
+      "strokeStyle": "solid",
+      "roughness": 1,
+      "opacity": 100,
+      "groupIds": [],
+      "frameId": null,
+      "index": "a8",
+      "roundness": {
+        "type": 2
+      },
+      "seed": 1191224882,
+      "version": 106,
+      "versionNonce": 702942638,
+      "isDeleted": false,
+      "boundElements": null,
+      "updated": 1755133385318,
+      "link": null,
+      "locked": false,
+      "points": [
+        [
+          0,
+          0
+        ],
+        [
+          114,
+          0
+        ]
+      ],
+      "lastCommittedPoint": null,
+      "startBinding": {
+        "elementId": "UAVyGpT7cjQgy00YAVE4D",
+        "focus": -0.44000000000000006,
+        "gap": 14.940185546875
+      },
+      "endBinding": {
+        "elementId": "4Qv6myMMN3VVTNU3W14--",
+        "focus": 0.14000000000000185,
+        "gap": 4.31024169921875
+      },
+      "startArrowhead": null,
+      "endArrowhead": "arrow",
+      "elbowed": false
+    }
+  ],
+  "appState": {
+    "gridSize": 20,
+    "gridStep": 5,
+    "gridModeEnabled": false,
+    "viewBackgroundColor": "#ffffff"
+  },
+  "files": {}
+}
