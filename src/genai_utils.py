@@ -1,3 +1,44 @@
+"""
+genai_utils.py
+
+Utilities for extracting and managing TRIZ ontology elements from patent data using Generative AI.
+
+This module provides:
+- Data schemas for TRIZ elements and their derived relationships.
+- The TRIZExtractor class for extracting, comparing, and storing TRIZ elements using LLMs and vector search.
+- Integration with OpenAI through LangChain for semantic search and structured extraction.
+
+Main Concepts:
+---------------
+- TRIZ Ontology: Describes patents using four key elements: kind_effect, task, object, physical_effect.
+- Derived Elements: New TRIZ relationships suggested by the LLM, linked to the closest existing element.
+- Vectorstore: Semantic database for storing and retrieving TRIZ elements.
+
+Classes:
+--------
+- TrizSchema: Pydantic model for standard TRIZ elements.
+- TrizSchemaOutput: Extends TrizSchema, adds 'derived_from' for provenance tracking.
+- TRIZExtractor: Main class for extraction, comparison, and storage of TRIZ elements.
+
+TRIZExtractor Workflow:
+-----------------------
+1. **extract**: Uses LLM to extract TRIZ elements from patent text.
+2. **vectorstore_search**: Finds similar TRIZ elements in the vectorstore.
+3. **derivative_decisor**: Compares extracted and existing elements, decides which to use.
+   - If a similar element exists (score < threshold), returns it.
+   - Otherwise, returns the extracted element and links to the closest existing one via 'derived_from'.
+4. **insert_derived_elements**: Adds new derived elements to the vectorstore for future retrieval.
+5. **run**: Orchestrates the full workflow for a given patent.
+
+Example Usage:
+--------------
+extractor = TRIZExtractor(vectorstore=vectorstore, verbose=True)
+result = extractor.run(title="Patent Title", abstract="Patent Abstract")
+
+Returns:
+    dict with keys: effect, task, object, physical_effect, derived_from
+"""
+
 from pydantic import BaseModel
 from openai import OpenAI
 from langchain.embeddings import OpenAIEmbeddings
@@ -5,16 +46,54 @@ from langchain.schema import Document
 
 
 class TrizSchema(BaseModel):
+    """
+    Pydantic model for TRIZ ontology elements.
+
+    Attributes:
+        kind_effect (str): Type of effect (e.g., "Mechanical", "Thermal").
+        task (str): Action performed (e.g., "Compress", "Heat").
+        object (str): Target object (e.g., "Water", "Metal").
+        physical_effect (str): Resulting physical effect (e.g., "Temperature increase").
+    """
     kind_effect: str
     task: str
     object: str
     physical_effect: str
 
 class TrizSchemaOutput(TrizSchema):
+    """
+    Extends TrizSchema to include provenance information.
+
+    Attributes:
+        derived_from (str | None): Reference to the origin TRIZ element (page_content or None).
+    """
     derived_from: str | None
 
 
 class TRIZExtractor:
+    """
+    Extracts, compares, and manages TRIZ ontology elements from patent data using LLMs and vector search.
+
+    Args:
+        vectorstore: LangChain vectorstore instance for semantic search.
+        verbose (bool): If True, prints detailed logs.
+
+    Methods:
+        extract(context: str) -> dict:
+            Extracts TRIZ elements from patent text using LLM.
+
+        vectorstore_search(query: str, k: int = 3) -> list:
+            Finds k most similar TRIZ elements in the vectorstore.
+
+        derivative_decisor(extraction, similar_samples, threshold=0.4) -> dict:
+            Decides whether to use an existing TRIZ element or a new derived one.
+
+        insert_derived_elements(result: dict):
+            Adds new derived TRIZ elements to the vectorstore.
+
+        run(title: str, abstract: str, threshold=0.4) -> dict:
+            Full workflow: extract, compare, store, and return TRIZ elements.
+    """
     def __init__(self, vectorstore, verbose=False):
         self.verbose = verbose
         self.vectorstore = vectorstore
@@ -53,57 +132,17 @@ class TRIZExtractor:
             ```
         """
 
-        self.prompt_derivate_decision = """Você receberá o título e o resumo de uma patente em 
-            português, bem como alguns metadados extraídos com base na **Ontologia da TRIZ**. Esta 
-            metodologia busca descrever uma patente a partir de uma série de elementos.
-
-            Além da patente e os metadados extraídos, você receberá um conjunto de dados já existentes na 
-            TRIZ que podem ser usados para descrever a patente. Sua tarefa será decidir se há algum conjunto 
-            de dados já existentes da TRIZ que podem ser usados para descrever a patente ou se os dados 
-            minerados serão utilizados. É importante tentar priorizar um elemento que já exista na TRIZ. Só 
-            traga um novo elemento se realmente nenhum elemento se aproximar do contexto.
-
-            Em resumo, a lógica adotada será:
-            1. Sabendo que devo priorizar elementos já existentes na TRIZ, devo descrever esta patente 
-            com os dados extraídos ou usar algum conjunto de dados da TRIZ que recebi?;
-            2. Caso eu utilize algum elemento já existente, devo retornar o mesmo com o `derived_from` nulo;
-            3. Caso eu utilize o elemento que foi fornecido, devo retornar o mesmo e apontar o elemento 
-            já existente na TRIZ que mais se aproxime a partir do `derived_from`.
-            4. Neste caso, `derived_from` recebe o `id` dos metadados do elemento mais próximo
-
-            Regras:
-            - Todos os campos de texto são obrigatórios
-            - O campo `derived_from` deve ser:
-            - `null` se o elemento já existe na base TRIZ
-            - Uma string com o `id` do elemento mais próximo existente se for derivado.
-            - NÃO INVENTE o id. Ele deve ser algum dos ids dos metadados listados em seu input
-            - Mantenha a terminologia consistente com os elementos TRIZ existentes
-            - Use descrições claras e específicas para cada campo
-
-
-            # Formato de saída
-            O formato de saída deve ser um JSON com os seguintes campos:
-            - `derived_from`: `id` do elemento mais próximo já existente na TRIZ.
-            - `effect`: tipo de efeito (ex: "Aumento da temperatura");
-            - `task`: `task` Tarefa (ex: "Aumentar a temperatura");
-            - `object`: `object` Objeto (ex: "Água");
-            - `physical_effect`: `physical_effect` Efeito físico (ex: "Aumento da temperatura").
-
-            Exemplo:
-            ```json
-            {{
-            "derived_from": "81071a34-d099-4dca-b07e-aaf120297f61", // Opcional: id da origem do registro
-            "effect": "Efeito",                                     // Tipo do efeito (ex: "Mecânico", "Térmico")
-            "task": "Identificação"                                 // Ação/tarefa (ex: "Comprimir", "Aquecer") 
-            "object": "Gás",                                        // Objeto alvo (ex: "Água", "Metal")
-            "physical_effect": "Adição de massa"                    // Efeito físico (ex: "Aumento de temperatura")
-            }}
-            ```
-        """
-
 
     def extract(self, context: str) -> dict:
-        # Implement the TRIZ extraction logic here
+        """
+        Extracts TRIZ elements from patent text using LLM.
+
+        Args:
+            context (str): Patent title and abstract.
+
+        Returns:
+            dict: Parsed TRIZ elements.
+        """
         response = self.openai_client.responses.parse(
             model="gpt-4.1",
             temperature=0,
@@ -117,32 +156,25 @@ class TRIZExtractor:
             text_format=TrizSchema,
         )
 
-        return response.output_parsed
+        return response.output_parsed.model_dump() if response.output_parsed is not None else {}
     
     def vectorstore_search(self, query, k=3):
+        """
+        Finds k most similar TRIZ elements in the vectorstore.
+
+        Args:
+            query (str): Query text.
+            k (int): Number of results.
+
+        Returns:
+            list: List of (Document, score) tuples.
+        """
         results = self.vectorstore.similarity_search_by_vector_with_relevance_scores(
             embedding=self.embedding_model.embed_query(query),
             k=k
         )
 
         return results
-
-    def derivative_decisor_ai(self, extraction: str) -> dict:
-        # Implement the comparison logic here
-        response = self.openai_client.responses.parse(
-            model="gpt-4.1",
-            temperature=0,
-            input=[
-                {"role": "system", "content": self.prompt_derivate_decision},
-                {
-                    "role": "user",
-                    "content": extraction,
-                },
-            ],
-            text_format=TrizSchemaOutput,
-        )
-        return response.output_parsed
-
 
     def prepare_context_derivative_decisor(self, query, extraction, similar_samples):
         prompt_derivative_decisor_user = f"""{query}
@@ -166,9 +198,15 @@ class TRIZExtractor:
 
     def derivative_decisor(self, extraction, similar_samples, threshold=0.4):
         """
-        Decide se retorna o elemento mais próximo da TRIZ ou o elemento extraído,
-        baseado no score de similaridade.
-        O campo derived_from passa a ser o page_content do elemento mais próximo.
+        Decides whether to use an existing TRIZ element or a new derived one.
+
+        Args:
+            extraction: Extracted TRIZ element (TrizSchema).
+            similar_samples: List of (Document, score) tuples.
+            threshold (float): Similarity threshold.
+
+        Returns:
+            dict: Chosen TRIZ element with provenance.
         """
         best_doc, best_score = min(similar_samples, key=lambda x: x[1])
         best_content = best_doc.page_content
@@ -178,7 +216,7 @@ class TRIZExtractor:
             print(f"Best content: {best_content}\nScore: {best_score}")
 
         if best_score < threshold:
-            # Retorna o elemento mais próximo da TRIZ
+            # Return the closest element
             return {
                 "derived_from": None,
                 "effect": best_doc.metadata["kind_effect"],
@@ -187,7 +225,7 @@ class TRIZExtractor:
                 "physical_effect": best_doc.metadata["physical_effect"]
             }
         else:
-            # Retorna o elemento extraído, derivado do mais próximo (page_content)
+            # Returns the extracted element with the closest derived one
             return {
                 "derived_from": best_content,
                 "effect": extraction.kind_effect,
@@ -199,10 +237,13 @@ class TRIZExtractor:
 
     def insert_derived_elements(self, result):
         """
-        Insere elementos derivados no vectorstore se 'derived_from' não for None.
+        Adds new derived TRIZ elements to the vectorstore if 'derived_from' is not None.
+
+        Args:
+            result (dict): TRIZ element with provenance.
         """
         if result.get("derived_from"):
-            # Monta o texto e metadados no padrão TRIZ
+
             text = f'O "{result["task"]}" é um {result["effect"]}, que no {result["object"]} causa {result["physical_effect"]}.'
 
             metadata = {
@@ -221,6 +262,17 @@ class TRIZExtractor:
                 print("Metadados:", metadata)
 
     def run(self, title:str, abstract:str, threshold=0.4) -> dict:
+        """
+        Full workflow for extracting and storing TRIZ elements from a patent.
+
+        Args:
+            title (str): Patent title.
+            abstract (str): Patent abstract.
+            threshold (float): Similarity threshold.
+
+        Returns:
+            dict: Final TRIZ element with provenance.
+        """
         query = f"""Título: {title}
         Abstract: {abstract}"""
 
@@ -241,7 +293,6 @@ class TRIZExtractor:
         if self.verbose:
             print("result\n", result, "\n**********\n\n")
 
-        # Chama o método para inserir elemento derivado, se necessário
         self.insert_derived_elements(result)
 
         return result
