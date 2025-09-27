@@ -1032,8 +1032,8 @@
       "index": "aT",
       "roundness": null,
       "seed": 179023866,
-      "version": 365,
-      "versionNonce": 1448170150,
+      "version": 402,
+      "versionNonce": 1442372836,
       "isDeleted": false,
       "boundElements": [
         {
@@ -1045,16 +1045,16 @@
           "type": "arrow"
         }
       ],
-      "updated": 1755773927687,
+      "updated": 1758587075999,
       "link": null,
       "locked": false,
-      "text": "O/A <<TAREFA>> é um/uma <<TIPO DE EFEITO>>, que\nno/na <<OBJETO>> causa <<EFEITO FÍSICO>>.",
+      "text": "O/A <<TAREFA>> atua no/na <<OBJETO>> para\nproduzir um/uma<<EFEITO FÍSICO>>.",
       "fontSize": 28,
       "fontFamily": 5,
       "textAlign": "left",
       "verticalAlign": "top",
       "containerId": null,
-      "originalText": "O/A <<TAREFA>> é um/uma <<TIPO DE EFEITO>>, que no/na <<OBJETO>> causa <<EFEITO FÍSICO>>.",
+      "originalText": "O/A <<TAREFA>> atua no/na <<OBJETO>> para produzir um/uma<<EFEITO FÍSICO>>.",
       "autoResize": false,
       "lineHeight": 1.25
     },
@@ -1133,10 +1133,10 @@
     {
       "id": "8TuHuLqGkPYZgFKfvVyHc",
       "type": "arrow",
-      "x": -1157.11372514304,
-      "y": 189.91661034996463,
-      "width": 520.9709252315681,
-      "height": 1.4883164452376434,
+      "x": -1158.0924339241992,
+      "y": 189.91940633780885,
+      "width": 530.1446800179491,
+      "height": 1.5145241459977399,
       "angle": 0,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
@@ -1150,8 +1150,8 @@
       "index": "b01",
       "roundness": null,
       "seed": 442236838,
-      "version": 489,
-      "versionNonce": 174314569,
+      "version": 526,
+      "versionNonce": 1225389028,
       "isDeleted": false,
       "boundElements": [
         {
@@ -1159,7 +1159,7 @@
           "id": "epo1DIrwK25VG7q10wDRH"
         }
       ],
-      "updated": 1757983523351,
+      "updated": 1758587076000,
       "link": null,
       "locked": false,
       "points": [
@@ -1168,8 +1168,8 @@
           0
         ],
         [
-          520.9709252315681,
-          -1.4883164452376434
+          530.1446800179491,
+          -1.5145241459977399
         ]
       ],
       "lastCommittedPoint": null,
@@ -1228,9 +1228,9 @@
       "id": "cQEdtQM79R08Iilqy8XBY",
       "type": "arrow",
       "x": 173.27090095394175,
-      "y": 201.8627420037906,
+      "y": 201.87837117522747,
       "width": 158.5557412400791,
-      "height": 1.6827881802399816,
+      "height": 1.6820830383694272,
       "angle": 0,
       "strokeColor": "#1e1e1e",
       "backgroundColor": "transparent",
@@ -1244,11 +1244,11 @@
       "index": "b03",
       "roundness": null,
       "seed": 1102807078,
-      "version": 1058,
-      "versionNonce": 2018488609,
+      "version": 1095,
+      "versionNonce": 202612836,
       "isDeleted": false,
       "boundElements": [],
-      "updated": 1756292750218,
+      "updated": 1758587076000,
       "link": null,
       "locked": false,
       "points": [
@@ -1258,7 +1258,7 @@
         ],
         [
           158.5557412400791,
-          1.6827881802399816
+          1.6820830383694272
         ]
       ],
       "lastCommittedPoint": null,

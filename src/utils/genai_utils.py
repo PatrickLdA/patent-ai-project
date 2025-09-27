@@ -55,7 +55,6 @@ class TrizSchema(BaseModel):
         object (str): Target object (e.g., "Water", "Metal").
         physical_effect (str): Resulting physical effect (e.g., "Temperature increase").
     """
-    kind_effect: str
     task: str
     object: str
     physical_effect: str
@@ -94,43 +93,37 @@ class TRIZExtractor:
         run(title: str, abstract: str, threshold=0.4) -> dict:
             Full workflow: extract, compare, store, and return TRIZ elements.
     """
-    def __init__(self, vectorstore, verbose=False):
+    def __init__(self, vectorstore, verbose=False, threshold=0.4, temperature=0):
         self.verbose = verbose
         self.vectorstore = vectorstore
+        self.threshold = threshold
+        self.temperature = temperature
         self.embedding_model = OpenAIEmbeddings()
 
         self.openai_client = OpenAI()
         self.prompt_extraction = """Você receberá o título e o resumo de uma patente em português.
-            A partir destes dados, vamos buscar minerar dados desta patente seguindo a **Ontologia da TRIZ**. 
-            Esta metodologia busca descrever uma patente a partir de uma série de elementos. Sua tarefa é 
-            identificar e retornar os seguintes elementos:
+A partir destes dados, vamos minerar elementos seguindo a **Ontologia da TRIZ**. 
 
-            - `task`: ação ou tarefa (ex: "Aquecer");
-            - `object`: objeto-alvo da ação (ex: "Água");
-            - `kind_effect`: tipo de efeito causado no objeto a partir da tarefa (ex: "Aumento da temperatura");
-            - `physical_effect`: o efeito físico utilizado ou observado (ex: "Efeito Joule").
+Sua tarefa é identificar e retornar os seguintes elementos, respeitando as definições abaixo:
 
-            É importante notar que a mineração dos dados não busca extrair exatamente os componentes da patente, 
-            mas sim um conjunto de termos e características suficientemente genéricos que consigam descrever a 
-            patente.
+- `task`: ação potencial expressa **sempre como verbo no infinitivo**, representando a atividade realizada para se atingir um objetivo (ex: "Aquecer", "Separar", "Reduzir atrito").
+- `object`: o **meio ou material alvo** sobre o qual a tarefa atua. Deve ser **sempre um substantivo** (ex: "Água", "Gás", "Superfície metálica").
+- `physical_effect`: o **efeito físico, químico ou transformação observável** associado à tarefa ou ao objeto. Pode ser um princípio (ex: "Efeito Joule", "Refração da luz", "Difusão térmica") ou um resultado direto da ação (ex: "Aumento da temperatura").
 
-            # Formato de saída
-            O formato de saída deve ser um JSON com os seguintes campos:
-            - `effect`: tipo de efeito (ex: "Aumento da temperatura");
-            - `task`: `task` Tarefa (ex: "Aumentar a temperatura");
-            - `object`: `object` Objeto (ex: "Água");
-            - `physical_effect`: `physical_effect` Efeito físico (ex: "Aumento da temperatura").
+Atenção:
+- Se não houver informação explícita, **generalize** a partir do contexto do resumo (ex: "Transformação de energia elétrica em calor" → "Efeito Joule").
+- Retorne **apenas um termo em cada campo**, evitando listas.
+- Use linguagem técnica, mas clara.
 
-            Exemplo:
-            ```json
-            {{
-            "effect": "Efeito",
-            "task": "Identificação",
-            "object": "Gás",
-            "physical_effect": "Adição de massa"
-            }}
-            ```
-        """
+# Formato de saída
+Retorne o resultado em JSON no seguinte formato:
+
+```json
+{
+  "task": "Separar",
+  "object": "Gás",
+  "physical_effect": "Difusão"
+}"""
 
 
     def extract(self, context: str) -> dict:
@@ -145,7 +138,7 @@ class TRIZExtractor:
         """
         response = self.openai_client.responses.parse(
             model="gpt-4.1",
-            temperature=0,
+            temperature=self.temperature,
             input=[
                 {"role": "system", "content": self.prompt_extraction},
                 {
@@ -169,6 +162,7 @@ class TRIZExtractor:
         Returns:
             list: List of (Document, score) tuples.
         """
+        # ref.: https://api.python.langchain.com/en/latest/vectorstores/langchain_community.vectorstores.chroma.Chroma.html#langchain_community.vectorstores.chroma.Chroma.similarity_search_by_vector_with_relevance_scores
         results = self.vectorstore.similarity_search_by_vector_with_relevance_scores(
             embedding=self.embedding_model.embed_query(query),
             k=k
@@ -196,7 +190,7 @@ class TRIZExtractor:
 
         return prompt_derivative_decisor_user
 
-    def derivative_decisor(self, extraction, similar_samples, threshold=0.4):
+    def derivative_decisor(self, extraction, similar_samples):
         """
         Decides whether to use an existing TRIZ element or a new derived one.
 
@@ -215,11 +209,10 @@ class TRIZExtractor:
             print(f"Best_doc: {best_doc}")
             print(f"Best content: {best_content}\nScore: {best_score}")
 
-        if best_score < threshold:
+        if best_score < self.threshold:
             # Return the closest element
             return {
                 "derived_from": None,
-                "effect": best_doc.metadata["kind_effect"],
                 "task": best_doc.metadata["task"],
                 "object": best_doc.metadata["object"],
                 "physical_effect": best_doc.metadata["physical_effect"]
@@ -228,10 +221,9 @@ class TRIZExtractor:
             # Returns the extracted element with the closest derived one
             return {
                 "derived_from": best_content,
-                "effect": extraction.kind_effect,
-                "task": extraction.task,
-                "object": extraction.object,
-                "physical_effect": extraction.physical_effect
+                "task": extraction["task"],
+                "object": extraction["object"],
+                "physical_effect": extraction["physical_effect"]
             }
 
 
@@ -244,10 +236,8 @@ class TRIZExtractor:
         """
         if result.get("derived_from"):
 
-            text = f'O "{result["task"]}" é um {result["effect"]}, que no {result["object"]} causa {result["physical_effect"]}.'
-
+            text = f'O/a {result["task"]} atua no/na {result["object"]} para produzir um/uma {result["physical_effect"]}.'
             metadata = {
-                "kind_effect": result["effect"],
                 "task": result["task"],
                 "object": result["object"],
                 "physical_effect": result["physical_effect"],
@@ -261,7 +251,7 @@ class TRIZExtractor:
                 print("Texto:", text)
                 print("Metadados:", metadata)
 
-    def run(self, title:str, abstract:str, threshold=0.4) -> dict:
+    def run(self, title:str, abstract:str) -> dict:
         """
         Full workflow for extracting and storing TRIZ elements from a patent.
 
@@ -274,7 +264,7 @@ class TRIZExtractor:
             dict: Final TRIZ element with provenance.
         """
         query = f"""Título: {title}
-        Abstract: {abstract}"""
+        Resumo: {abstract}"""
 
         if self.verbose:
             print("Query to be processed\n", query, "\n**********\n\n")
@@ -289,7 +279,7 @@ class TRIZExtractor:
         if self.verbose:
             print("Similar samples result\n", similar_samples, "\n**********\n\n")
 
-        result = self.derivative_decisor(extraction, similar_samples, threshold=threshold)
+        result = self.derivative_decisor(extraction, similar_samples)
         if self.verbose:
             print("result\n", result, "\n**********\n\n")
 
