@@ -50,6 +50,7 @@ executing==2.2.0
 fastapi==0.116.1
 fastapi-cli==0.0.8
 fastapi-cloud-cli==0.1.5
+fastjsonschema==2.21.2
 fastrlock==0.8.3
 filelock==3.18.0
 flatbuffers==25.2.10
@@ -118,6 +119,8 @@ multidict==6.5.0
 multiprocess==0.70.16
 murmurhash==1.0.12
 mypy_extensions==1.1.0
+narwhals==2.7.0
+nbformat==5.10.4
 nest-asyncio==1.6.0
 networkx==3.5
 ninja==1.11.1.4
@@ -161,6 +164,7 @@ pexpect==4.9.0
 pfzy==0.3.4
 pillow==11.2.1
 platformdirs==4.3.7
+plotly==6.3.1
 posthog==5.4.0
 preshed==3.0.9
 prometheus-fastapi-instrumentator==7.1.0
